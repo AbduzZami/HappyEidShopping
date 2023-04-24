@@ -5,25 +5,24 @@ async function example() {
   let driver = await new Builder().forBrowser("chrome").build();
   try {
     await driver.get(
-      "https://infinitymegamall.com/product-category/men/panjabi/"
+      "https://www.yellowclothing.net/collections/men-s-panjabi"
     );
     await driver;
 
-    driver.findElements(By.className("product_inner")).then((elements) => {
+    driver.findElements(By.className("spf-product-card")).then((elements) => {
+      console.log(elements.length);
       elements.forEach((element) => {
-        element.getText().then((text) => {
-          console.log("text");
-        });
         element
-          .findElement(By.className("woocommerce-loop-product__title"))
-          .getText()
-          .then((text) => {
-            console.log(text);
+          .findElement(By.className("spf-product-card__title"))
+          .then((element) => {
+            element.getText().then((text) => {
+              console.log(text);
+            });
           });
       });
       setTimeout(async () => {
         await driver.quit();
-      }, 5000);
+      }, 10000);
     });
   } catch (error) {
     console.log(error);
