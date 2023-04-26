@@ -39,11 +39,11 @@ function ProductPage() {
               <div className="card-body">
                 <h2 className="card-title">
                   {product.name}
-                  <div className="badge badge-secondary">Panjabi</div>
+                  <div className="badge badge-secondary">{prodType}</div>
                 </h2>
                 <p>{product.price}</p>
                 <div className="card-actions justify-end">
-                  <div className="badge badge-outline">Arong</div>
+                  <div className="badge badge-outline">{product.brand}</div>
                 </div>
               </div>
             </Link>

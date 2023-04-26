@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
                         return href;
                       })
                       .then((href) => {
-                        products.push({ name, price, src, href });
+                        products.push({ name, price, src, href, "brand" : "arong" });
                       });
                   });
               });
