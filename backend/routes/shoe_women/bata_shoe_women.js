@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     await driver.get("https://www.batabd.com/collections/women");
     await driver;
 
-    driver.executeScript("window.scrollTo(0, 10000)");
+    // driver.executeScript("window.scrollTo(0, 10000)");
     driver.findElements(By.className("inner-top")).then((elements) => {
       let products = [];
       elements.forEach((element) => {
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
                       .getAttribute("href")
                       .then((href) => {
                         console.log(href);
-                        return "https://www.batabd.com" + href;
+                        return href || "";
                       })
                       .then((href) => {
                         console.log(href);

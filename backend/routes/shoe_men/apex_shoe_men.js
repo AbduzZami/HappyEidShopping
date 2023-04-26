@@ -6,40 +6,50 @@ require("chromedriver");
 router.get("/", async (req, res) => {
   let driver = await new Builder().forBrowser("chrome").build();
   try {
-    await driver.get("https://www.aarong.com/catalogsearch/result/?q=kurta");
+    await driver.get("https://www.apex4u.com/men");
     await driver;
 
-    driver.findElements(By.className("product-item-info")).then((elements) => {
+    // driver.executeScript("window.scrollTo(0, 10000)");
+    driver.findElements(By.className("bucket_left")).then((elements) => {
       let products = [];
       elements.forEach((element) => {
         //   element.getText().then((text) => {
         //     console.log(text);
         //   });
         element
-          .findElement(By.className("product-item-link"))
+          .findElement(By.className("mtb-title"))
           .getText()
           .then((name) => {
+            console.log(name);
             element
-              .findElement(By.className("price"))
+              .findElement(By.className("sp_amt"))
               .getText()
               .then((price) => {
+                console.log(price);
                 element
-                  .findElement(By.className("product-image-photo"))
+                  .findElement(By.className("mtb-img"))
                   .getAttribute("src")
                   .then((src) => {
                     console.log(src);
-                    return src;
+                    return src || "";
                   })
                   .then((src) => {
                     element
-                      .findElement(By.className("product-item-link"))
+                      .findElement(By.css("a"))
                       .getAttribute("href")
                       .then((href) => {
                         console.log(href);
-                        return href;
+                        return href || "";
                       })
                       .then((href) => {
-                        products.push({ name, price, src, href, "brand" : "arong" });
+                        console.log(href);
+                        products.push({
+                          name,
+                          price,
+                          src,
+                          href,
+                          brand: "Apex",
+                        });
                       });
                   });
               });
@@ -47,13 +57,11 @@ router.get("/", async (req, res) => {
       });
       setTimeout(async () => {
         await driver.quit();
+        console.log(products);
         res.status(200).json(products);
-      }, 3000);
+      }, 10000);
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send("Internal server error");
-  } onerror (error) {
     console.log(error);
     res.status(500).send("Internal server error");
   }

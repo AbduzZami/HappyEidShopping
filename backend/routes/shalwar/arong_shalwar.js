@@ -39,7 +39,13 @@ router.get("/", async (req, res) => {
                         return href;
                       })
                       .then((href) => {
-                        products.push({ name, price, src, href, "brand" : "arong" });
+                        products.push({
+                          name,
+                          price,
+                          src,
+                          href,
+                          brand: "arong",
+                        });
                       });
                   });
               });
@@ -51,9 +57,6 @@ router.get("/", async (req, res) => {
       }, 3000);
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send("Internal server error");
-  } onerror (error) {
     console.log(error);
     res.status(500).send("Internal server error");
   }

@@ -39,7 +39,13 @@ router.get("/", async (req, res) => {
                         return href;
                       })
                       .then((href) => {
-                        products.push({ name, price, src, href, "brand" : "arong" });
+                        products.push({
+                          name,
+                          price,
+                          src,
+                          href,
+                          brand: "Arong",
+                        });
                       });
                   });
               });
@@ -48,12 +54,9 @@ router.get("/", async (req, res) => {
       setTimeout(async () => {
         await driver.quit();
         res.status(200).json(products);
-      }, 3000);
+      }, 5000);
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send("Internal server error");
-  } onerror (error) {
     console.log(error);
     res.status(500).send("Internal server error");
   }
