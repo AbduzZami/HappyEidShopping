@@ -48,9 +48,12 @@ router.get("/", async (req, res) => {
       setTimeout(async () => {
         await driver.quit();
         res.status(200).json(products);
-      }, 1000);
+      }, 3000);
     });
   } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  } onerror (error) {
     console.log(error);
     res.status(500).send("Internal server error");
   }
