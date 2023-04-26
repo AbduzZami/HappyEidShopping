@@ -3,7 +3,7 @@ const router = express.Router();
 const { By, Key, Builder } = require("selenium-webdriver");
 require("chromedriver");
 
-async function run() {
+router.get("/", async (req, res) => {
   let driver = await new Builder().forBrowser("chrome").build();
   try {
     await driver.get("https://www.batabd.com/collections/men");
@@ -58,15 +58,13 @@ async function run() {
       setTimeout(async () => {
         await driver.quit();
         console.log(products);
-        // res.status(200).json(products);
+        res.status(200).json(products);
       }, 10000);
     });
   } catch (error) {
     console.log(error);
-    // res.status(500).send("Internal server error");
+    res.status(500).send("Internal server error");
   }
-}
+});
 
-run();
-
-// module.exports = router;
+module.exports = router;
